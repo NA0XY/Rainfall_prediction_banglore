@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ward Flood Hazard Dashboard</title>
+    <link
+        rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body data-metrics='{{ metrics | tojson | safe }}'>
+    <header>
+        <h1>Ward Flood Hazard Dashboard</h1>
+        <p>Data-driven prioritisation for infrastructure planning</p>
+    </header>
+
+    <main>
+        <aside class="sidebar">
+            <section class="card">
+                <h2>Model Snapshot</h2>
+                <ul>
+                    <li><strong>Best Model:</strong> {{ metrics.get('best_model', 'N/A') }}</li>
+                    <li><strong>Accuracy:</strong> {{ '{:.2%}'.format(metrics.get('accuracy', 0)) if metrics.get('accuracy') else 'N/A' }}</li>
+                    <li><strong>Generated:</strong> {{ metrics.get('generated_at', 'N/A') }}</li>
+                </ul>
+                <div id="hazard-counts"></div>
+            </section>
+
+            <section class="card">
+                <h2>Legend</h2>
+                <ul class="legend" id="legend"></ul>
+            </section>
+
+            <section class="card">
+                <h2>Model Comparison</h2>
+                <table id="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </aside>
+
+        <section class="content">
+            <div id="map"></div>
+            <section class="card" id="ward-card">
+                <h2 id="ward-title">Select a ward</h2>
+                <div id="ward-details">
+                    <p>Click a ward on the map to view its flood hazard profile.</p>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

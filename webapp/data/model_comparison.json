@@ -1,0 +1,18 @@
+[
+  {
+    "model":"LogisticRegression",
+    "accuracy":0.8979591837
+  },
+  {
+    "model":"RandomForest",
+    "accuracy":0.7346938776
+  },
+  {
+    "model":"GradientBoosting",
+    "accuracy":0.7346938776
+  },
+  {
+    "model":"SupportVectorMachine",
+    "accuracy":0.7142857143
+  }
+]
