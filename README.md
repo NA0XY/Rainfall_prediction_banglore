@@ -1,7 +1,9 @@
 # Ward-level Flooding Hazard Prediction — Project Summary
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ## Executive summary
-This project builds an end-to-end, geospatial machine learning pipeline to predict ward-level flooding hazard. It ingests multi-source spatial and temporal data, engineers risk features, trains and compares multiple ML models, explains predictions with SHAP, evaluates robustness against climate-change scenarios, analyzes seasonal and long-term rainfall patterns, forecasts near-term rainfall, and exports artifacts for a web application.
+This project builds an end-to-end, geospatial machine learning pipeline to predict ward-level flooding hazard. It ingests multi-source spatial and temporal data, engineers risk features, trains and evaluates multiple models, and delivers actionable ward-level risk classifications and forecasts.
 
 Key outcomes
 - Data coverage: 243 wards, 5,517 columns (including 1,826 daily rainfall columns for 2010–2024)
@@ -138,7 +140,7 @@ Why transpose
 
 ## Phase 9 — Dynamic risk forecasting (30-day)
 - Select current highest-risk ward (by hazard_score)
-- Create 30-day feature frames by injecting SARIMA forecast into the ward’s features
+- Create 30-day feature frames by injecting SARIMA forecast into the ward's features
 - Predict daily hazard classes and visualize as a risk-level bar chart
 
 Why
@@ -215,5 +217,12 @@ Outputs to expect in webapp/data/
 - hazard_score — normalized composite risk indicator (see formula above)
 - hazard_class — Low / Medium / High from hazard_score quantiles
 
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+Copyright © 2026 Harsh Singhal
+
 ---
-This document summarizes the full pipeline from data extraction through model training, interpretability, climate and temporal analyses, dynamic forecasting, and deployment-ready exports. For any extension (new data sources, additional models, real validation), the current structure is designed to be modular and easy to iterate on.
+This document summarizes the full pipeline from data extraction through model training, interpretability, climate and temporal analyses, dynamic forecasting, and deployment-ready exports. For any questions or contributions, please open an issue or pull request.
