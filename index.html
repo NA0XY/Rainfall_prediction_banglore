@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Prediction Data Webapp</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Flood Prediction Dashboard</h1>
+        <p>Showcasing extracted data for wards in the study area</p>
+    </header>
+
+    <section id="images">
+        <h2>Data Visualizations</h2>
+        <div class="image-gallery">
+            <img src="extracted_images/3.-exploratory-analysis-seasonal-rainfall-patterns.png" alt="Seasonal Rainfall Patterns">
+            <img src="extracted_images/6.-model-performance-visualizations.png" alt="Model Performance">
+            <img src="extracted_images/6.-model-performance-visualizations-1.png" alt="Model Performance 1">
+            <img src="extracted_images/6.-model-performance-visualizations-2.png" alt="Model Performance 2">
+            <img src="extracted_images/6.-model-performance-visualizations-3.png" alt="Model Performance 3">
+            <img src="extracted_images/7.-model-application-climate-scenario-simulation.png" alt="Climate Scenario Simulation">
+        </div>
+    </section>
+
+    <section id="map-section">
+        <h2>Wards Map</h2>
+        <div id="map"></div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

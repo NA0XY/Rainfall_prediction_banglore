@@ -1,32 +1,18 @@
-# Python virtual environments
-.venv/
-
-# Jupyter checkpoints
-.ipynb_checkpoints/
-
-# VS Code and JetBrains metadata
-.vscode/
-.idea/
-
-# Local geospatial datasets
-5th\ cite
-5th\ cite/
-5th\ cite*/
-*.gpkg
-*.tif
-*.zip
-
-# OS cruft
+# System files
 .DS_Store
 Thumbs.db
-
-# Environment files
-.env
-*.env
-
-# Compiled artifacts
 __pycache__/
 *.pyc
+.venv/
+.env
 
-# Logs
-*.log
+# Large data files
+*.pkl
+wards_extracted.geojson
+
+# Directories
+Flood_Prediction_Data_Local/
+extracted_images/
+
+# Keep these
+# *.gpkg is included by default as we are not ignoring it

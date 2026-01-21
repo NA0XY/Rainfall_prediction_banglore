@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Risk Prediction Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-water"></i>
+                <span>Flood Risk Prediction</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#map" class="nav-link">Map</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#model" class="nav-link">Model</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="overview" class="hero">
+        <div class="hero-content">
+            <h1>Real-Time Flood Risk Prediction System</h1>
+            <p>AI-powered flood risk assessment using historical rainfall data, topography, and real-time weather integration</p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3 id="ward-count">243</h3>
+                    <p>Wards Monitored</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>87.65%</h3>
+                    <p>Model Accuracy</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-database"></i>
+                    <h3>15 Years</h3>
+                    <p>Historical Data</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 id="high-risk-count">0</h3>
+                    <p>High Risk Wards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="map-section">
+        <div class="section-header">
+            <h2><i class="fas fa-globe-americas"></i> Interactive Risk Map</h2>
+            <p>Explore flood risk levels across different wards</p>
+        </div>
+        <div class="map-controls">
+            <div class="control-group">
+                <label for="risk-filter">Filter by Risk Level:</label>
+                <select id="risk-filter">
+                    <option value="all">All Wards</option>
+                    <option value="High Risk">High Risk</option>
+                    <option value="Medium Risk">Medium Risk</option>
+                    <option value="Low Risk">Low Risk</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="search-ward">Search Ward:</label>
+                <input type="text" id="search-ward" placeholder="Enter ward name...">
+            </div>
+        </div>
+        <div id="leaflet-map"></div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="analytics-section">
+        <div class="section-header">
+            <h2><i class="fas fa-chart-bar"></i> Data Analytics</h2>
+            <p>Comprehensive analysis of rainfall patterns and risk distribution</p>
+        </div>
+        <div class="analytics-grid">
+            <div class="chart-container">
+                <h3>Rainfall Patterns</h3>
+                <img src="extracted_images/3.-exploratory-analysis-seasonal-rainfall-patterns.png" alt="Seasonal Rainfall Patterns">
+            </div>
+            <div class="chart-container">
+                <h3>Model Performance</h3>
+                <img src="extracted_images/6.-model-performance-visualizations.png" alt="Model Performance">
+            </div>
+            <div class="chart-container">
+                <h3>Feature Importance</h3>
+                <img src="extracted_images/6.-model-performance-visualizations-1.png" alt="Feature Importance">
+            </div>
+            <div class="chart-container">
+                <h3>Risk Distribution</h3>
+                <canvas id="risk-distribution-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>ROC Curve</h3>
+                <img src="extracted_images/6.-model-performance-visualizations-2.png" alt="ROC Curve">
+            </div>
+            <div class="chart-container">
+                <h3>Climate Scenarios</h3>
+                <img src="extracted_images/7.-model-application-climate-scenario-simulation.png" alt="Climate Scenarios">
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Performance Section -->
+    <section id="model" class="model-section">
+        <div class="section-header">
+            <h2><i class="fas fa-cogs"></i> Model Performance</h2>
+            <p>Stacking Ensemble Model (Meta-Learner) - High Risk vs Others</p>
+        </div>
+        <div class="model-grid">
+            <div class="model-card">
+                <h3>Confusion Matrix</h3>
+                <div class="confusion-matrix">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Predicted: Other</th>
+                                <th>Predicted: High Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Actual: Other</strong></td>
+                                <td class="true-negative">118</td>
+                                <td class="false-positive">5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Actual: High Risk</strong></td>
+                                <td class="false-negative">25</td>
+                                <td class="true-positive">95</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="model-card">
+                <h3>Classification Metrics</h3>
+                <div class="metrics-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>F1-Score</th>
+                                <th>Support</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Other</strong></td>
+                                <td>0.83</td>
+                                <td>0.96</td>
+                                <td>0.89</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td><strong>High Risk</strong></td>
+                                <td>0.95</td>
+                                <td>0.79</td>
+                                <td>0.86</td>
+                                <td>120</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Weighted Avg</strong></td>
+                                <td>0.89</td>
+                                <td>0.88</td>
+                                <td>0.88</td>
+                                <td>243</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="model-card">
+                <h3>Model Specifications</h3>
+                <ul class="specs-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>Algorithm:</strong> Stacking Ensemble (Meta-Learner)</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Base Models:</strong> XGBoost + LightGBM</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Meta-Learner:</strong> Logistic Regression (L1)</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Accuracy:</strong> 87.65%</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Training Period:</strong> 2010-2024</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Features:</strong> 16 + Polynomial Features</li>
+                </ul>
+            </div>
+            <div class="model-card">
+                <h3>Key Features</h3>
+                <ul class="features-list">
+                    <li><i class="fas fa-mountain"></i> Elevation & Slope</li>
+                    <li><i class="fas fa-cloud-rain"></i> Rainfall Statistics (15 years)</li>
+                    <li><i class="fas fa-water"></i> Drainage Density</li>
+                    <li><i class="fas fa-tree"></i> Land Cover Classification</li>
+                    <li><i class="fas fa-car"></i> Traffic Congestion Factor</li>
+                    <li><i class="fas fa-chart-line"></i> Rainfall Variability (CV, Skew, Kurtosis)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Flood Risk Prediction System. Data powered by Earth Engine & CHIRPS.</p>
+            <p>Last Updated: <span id="last-update"></span></p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
